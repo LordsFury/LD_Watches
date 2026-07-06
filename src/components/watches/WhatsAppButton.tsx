@@ -23,7 +23,7 @@ export default function WhatsAppButton({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center justify-center w-10 h-10 rounded-full bg-ld-whatsapp text-white hover:bg-[#20bd5a] transition-colors ${className}`}
+        className={`inline-flex items-center justify-center w-10 h-10 rounded-full bg-ld-whatsapp text-white hover:bg-[#1a9549] transition-colors ${className}`}
         aria-label={`Order ${watch.name} on WhatsApp`}
       >
         <MessageCircle className="w-5 h-5" />
@@ -38,7 +38,7 @@ export default function WhatsAppButton({
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
-        className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-ld-whatsapp text-white hover:bg-[#20bd5a] transition-colors duration-200 ${className}`}
+        className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-ld-whatsapp text-white hover:bg-[#1a9549] transition-colors duration-200 ${className}`}
       >
         <MessageCircle className="w-4 h-4" />
         Order Now
@@ -65,7 +65,7 @@ export default function WhatsAppButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-ld-whatsapp text-white rounded-lg font-semibold hover:bg-[#20bd5a] transition-colors duration-200 ${className}`}
+      className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-ld-whatsapp text-white rounded-lg font-semibold hover:bg-[#1a9549] transition-colors duration-200 ${className}`}
     >
       <MessageCircle className="w-5 h-5" />
       Order Now

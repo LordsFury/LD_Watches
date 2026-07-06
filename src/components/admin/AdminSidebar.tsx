@@ -35,7 +35,7 @@ export default function AdminSidebar({ onNavigate, showClose }: AdminSidebarProp
     <aside className="w-full h-full bg-ld-dark border-r border-ld-grey/50 flex flex-col">
       <div className="p-5 border-b border-ld-grey/50 flex items-center justify-between">
         <Link href="/admin" className="flex items-center gap-2.5" onClick={onNavigate}>
-          <WatchLogo className="w-8 h-8" />
+          <WatchLogo size="admin" />
           <span className="font-[family-name:var(--font-display)] text-base font-bold text-white leading-tight">
             {SITE_NAME_SHORT} <span className="text-ld-gold">Admin</span>
           </span>

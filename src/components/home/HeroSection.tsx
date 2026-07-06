@@ -28,7 +28,7 @@ export default function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 flex min-h-[100svh] flex-col justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20">
+      <div className="relative z-10 flex min-h-[100svh] flex-col justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 pb-10 sm:pb-12">
         <div className="w-full max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -88,7 +88,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 1 }}
-            className="mt-12 sm:mt-16 flex justify-center"
+            className="mt-8 sm:mt-10 flex justify-center"
           >
             <div className="w-6 h-10 border-2 border-ld-gold/35 rounded-full flex justify-center pt-2 glass">
               <motion.div

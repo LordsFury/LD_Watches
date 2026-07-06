@@ -7,11 +7,11 @@
   --color-ld-grey: #2e2e2e;
   --color-ld-silver: #a3a3a3;
   --color-ld-light: #d4d4d4;
-  --color-ld-gold: #c5a028;
-  --color-ld-gold-light: #d4af37;
-  --color-ld-gold-dark: #9a7b1a;
-  --color-ld-gold-muted: #7a6320;
-  --color-ld-whatsapp: #25d366;
+  --color-ld-gold: #d4a82e;
+  --color-ld-gold-light: #ecc84a;
+  --color-ld-gold-dark: #b8891f;
+  --color-ld-gold-muted: #8a6a18;
+  --color-ld-whatsapp: #1fa855;
 
   --font-display: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -64,7 +64,7 @@
 
 @layer utilities {
   .text-gradient-gold {
-    background: linear-gradient(135deg, #d4af37, var(--color-ld-gold), var(--color-ld-gold-dark));
+    background: linear-gradient(135deg, #f0c84a, var(--color-ld-gold), var(--color-ld-gold-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -74,14 +74,14 @@
     background: rgba(8, 8, 8, 0.55);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(197, 160, 40, 0.14);
+    border: 1px solid rgba(212, 168, 46, 0.14);
   }
 
   .glass-nav {
     background: rgba(8, 8, 8, 0.62);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid rgba(197, 160, 40, 0.12);
+    border-bottom: 1px solid rgba(212, 168, 46, 0.12);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
   }
 
@@ -89,22 +89,22 @@
     background: rgba(26, 26, 26, 0.42);
     backdrop-filter: blur(16px) saturate(150%);
     -webkit-backdrop-filter: blur(16px) saturate(150%);
-    border: 1px solid rgba(197, 160, 40, 0.14);
+    border: 1px solid rgba(212, 168, 46, 0.14);
   }
 
   .glass-card {
     background: rgba(26, 26, 26, 0.5);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(197, 160, 40, 0.12);
+    border: 1px solid rgba(212, 168, 46, 0.12);
   }
 
   .gold-glow {
-    box-shadow: 0 0 32px rgba(197, 160, 40, 0.18);
+    box-shadow: 0 0 32px rgba(212, 168, 46, 0.18);
   }
 
   .gold-glow-hover:hover {
-    box-shadow: 0 0 42px rgba(197, 160, 40, 0.28);
+    box-shadow: 0 0 42px rgba(212, 168, 46, 0.28);
   }
 
   .btn-gold {
@@ -123,13 +123,13 @@
     background: rgba(26, 26, 26, 0.5);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(197, 160, 40, 0.12);
+    border: 1px solid rgba(212, 168, 46, 0.12);
     border-radius: 1rem;
     transition: all 0.3s;
   }
 
   .card-surface:hover {
-    border-color: rgba(197, 160, 40, 0.3);
+    border-color: rgba(212, 168, 46, 0.3);
   }
 }
 
@@ -149,7 +149,7 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(197, 160, 40, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 46, 0.12), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }

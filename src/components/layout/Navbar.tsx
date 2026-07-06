@@ -6,7 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import WatchLogo from "@/components/ui/WatchLogo";
-import BrandName from "@/components/ui/BrandName";
 
 const navLinks = [
   { href: "/", label: "Home", hash: false },
@@ -64,12 +63,9 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-[4.5rem]">
-          <Link href="/" className="flex items-center gap-2.5 group z-50 min-w-0">
-            <WatchLogo className="w-9 h-9 sm:w-10 sm:h-10" />
-            <span className="font-[family-name:var(--font-display)] font-bold leading-tight text-sm sm:text-base md:text-lg truncate">
-              <BrandName />
-            </span>
+        <div className="flex items-center justify-between h-[4.25rem] md:h-20">
+          <Link href="/" className="flex items-center group z-50 shrink-0 -my-1">
+            <WatchLogo size="nav" priority />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
@@ -117,7 +113,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 top-16 bg-black/60 md:hidden z-40"
+              className="fixed inset-0 top-[4.25rem] md:top-20 bg-black/60 md:hidden z-40"
               onClick={() => setIsOpen(false)}
               aria-hidden="true"
             />

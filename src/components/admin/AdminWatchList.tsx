@@ -7,6 +7,8 @@ import { Watch } from "@/types/watch";
 import { formatPrice, getMainImage } from "@/lib/utils";
 import { Pencil, Trash2, Eye, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
+import ConfirmModal from "@/components/ui/ConfirmModal";
+import AdminWatchViewModal from "./AdminWatchViewModal";
 
 interface AdminWatchListProps {
   watches: Watch[];
@@ -15,18 +17,30 @@ interface AdminWatchListProps {
 
 export default function AdminWatchList({ watches, onAddWatch }: AdminWatchListProps) {
   const router = useRouter();
+  const [viewWatch, setViewWatch] = useState<Watch | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+  const [deleteError, setDeleteError] = useState("");
 
-  const handleDelete = async (id: string, name: string) => {
-    if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
 
-    setDeleting(id);
+    setDeleting(deleteTarget.id);
+    setDeleteError("");
+
     try {
-      const res = await fetch(`/api/watches/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Delete failed");
+      const res = await fetch(`/api/watches/${deleteTarget.id}`, { method: "DELETE" });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Delete failed");
+      }
+
+      setDeleteTarget(null);
+      setViewWatch(null);
       router.refresh();
-    } catch {
-      alert("Failed to delete watch");
+    } catch (err) {
+      setDeleteError(err instanceof Error ? err.message : "Failed to delete watch");
     } finally {
       setDeleting(null);
     }
@@ -49,6 +63,36 @@ export default function AdminWatchList({ watches, onAddWatch }: AdminWatchListPr
 
   return (
     <>
+      <AdminWatchViewModal
+        watch={viewWatch}
+        onClose={() => setViewWatch(null)}
+        onDelete={(watch) => setDeleteTarget({ id: watch._id, name: watch.name })}
+      />
+
+      <ConfirmModal
+        isOpen={Boolean(deleteTarget)}
+        title="Delete Watch"
+        message={
+          deleteTarget
+            ? `Are you sure you want to delete "${deleteTarget.name}"? This action cannot be undone.`
+            : ""
+        }
+        confirmLabel="Delete Watch"
+        loading={deleting === deleteTarget?.id}
+        onClose={() => {
+          if (deleting) return;
+          setDeleteTarget(null);
+          setDeleteError("");
+        }}
+        onConfirm={confirmDelete}
+      />
+
+      {deleteError && (
+        <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
+          {deleteError}
+        </div>
+      )}
+
       {/* Mobile card layout */}
       <div className="space-y-3 md:hidden">
         {watches.map((watch) => (
@@ -59,7 +103,7 @@ export default function AdminWatchList({ watches, onAddWatch }: AdminWatchListPr
             <div className="flex gap-3">
               <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-ld-charcoal shrink-0">
                 <Image
-                  src={watch.images[0] || "/placeholder-watch.svg"}
+                  src={getMainImage(watch)}
                   alt={watch.name}
                   fill
                   className="object-cover"
@@ -83,14 +127,18 @@ export default function AdminWatchList({ watches, onAddWatch }: AdminWatchListPr
               </div>
             </div>
             <div className="flex items-center justify-end gap-1 mt-3 pt-3 border-t border-ld-grey/30">
-              <Link href={`/watches/${watch.slug}`} target="_blank" className="p-2 text-ld-silver hover:text-ld-gold" title="View">
+              <button
+                onClick={() => setViewWatch(watch)}
+                className="p-2 text-ld-silver hover:text-ld-gold"
+                title="View"
+              >
                 <Eye className="w-4 h-4" />
-              </Link>
+              </button>
               <Link href={`/admin/watches/${watch._id}/edit`} className="p-2 text-ld-silver hover:text-ld-gold" title="Edit">
                 <Pencil className="w-4 h-4" />
               </Link>
               <button
-                onClick={() => handleDelete(watch._id, watch.name)}
+                onClick={() => setDeleteTarget({ id: watch._id, name: watch.name })}
                 disabled={deleting === watch._id}
                 className="p-2 text-ld-silver hover:text-red-400 disabled:opacity-50"
                 title="Delete"
@@ -150,14 +198,18 @@ export default function AdminWatchList({ watches, onAddWatch }: AdminWatchListPr
                 </td>
                 <td className="py-3 px-4">
                   <div className="flex items-center justify-end gap-1">
-                    <Link href={`/watches/${watch.slug}`} target="_blank" className="p-2 text-ld-silver hover:text-ld-gold transition-colors" title="View">
+                    <button
+                      onClick={() => setViewWatch(watch)}
+                      className="p-2 text-ld-silver hover:text-ld-gold transition-colors"
+                      title="View"
+                    >
                       <Eye className="w-4 h-4" />
-                    </Link>
+                    </button>
                     <Link href={`/admin/watches/${watch._id}/edit`} className="p-2 text-ld-silver hover:text-ld-gold transition-colors" title="Edit">
                       <Pencil className="w-4 h-4" />
                     </Link>
                     <button
-                      onClick={() => handleDelete(watch._id, watch.name)}
+                      onClick={() => setDeleteTarget({ id: watch._id, name: watch.name })}
                       disabled={deleting === watch._id}
                       className="p-2 text-ld-silver hover:text-red-400 transition-colors disabled:opacity-50"
                       title="Delete"

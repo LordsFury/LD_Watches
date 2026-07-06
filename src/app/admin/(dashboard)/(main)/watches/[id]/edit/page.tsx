@@ -20,6 +20,8 @@ export default async function EditWatchPage({ params }: EditWatchPageProps) {
       watch = {
         ...doc,
         _id: String(doc._id),
+        mainImageIndex: doc.mainImageIndex ?? 0,
+        waterResistant: doc.waterResistant ?? Boolean(doc.specifications?.waterResistance),
         createdAt: doc.createdAt?.toISOString?.() ?? String(doc.createdAt),
         updatedAt: doc.updatedAt?.toISOString?.() ?? String(doc.updatedAt),
       } as WatchType;

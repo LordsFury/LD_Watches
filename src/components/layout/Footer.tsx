@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import WatchLogo from "@/components/ui/WatchLogo";
-import BrandName from "@/components/ui/BrandName";
 
 export default function Footer() {
   return (
@@ -9,11 +8,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <WatchLogo className="w-8 h-8" />
-              <span className="font-[family-name:var(--font-display)] text-lg font-bold leading-tight">
-                <BrandName />
-              </span>
+            <Link href="/" className="inline-flex mb-4">
+              <WatchLogo size="footer" />
             </Link>
             <p className="text-ld-silver text-sm leading-relaxed">
               Curating exceptional timepieces for the discerning collector.

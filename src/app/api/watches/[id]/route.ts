@@ -63,27 +63,27 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       );
     }
 
+    const updates: Record<string, unknown> = {};
+
+    if (body.name !== undefined) updates.name = body.name;
+    if (body.description !== undefined) updates.description = body.description;
+    if (body.price !== undefined) updates.price = Number(body.price);
+    if (body.category !== undefined) updates.category = body.category;
+    if (body.brand !== undefined) updates.brand = body.brand;
+    if (body.images !== undefined) updates.images = body.images;
+    if (body.mainImageIndex !== undefined) updates.mainImageIndex = Number(body.mainImageIndex);
+    if (body.waterResistant !== undefined) updates.waterResistant = Boolean(body.waterResistant);
+    if (body.inStock !== undefined) updates.inStock = Boolean(body.inStock);
+    if (body.featured !== undefined) updates.featured = Boolean(body.featured);
+
     if (body.name && body.name !== existing.name) {
-      body.slug = await generateUniqueSlug(body.name, id);
+      updates.slug = await generateUniqueSlug(body.name, id);
     }
 
-    const updated = await Watch.findByIdAndUpdate(
-      id,
-      {
-        ...(body.name && { name: body.name }),
-        ...(body.slug && { slug: body.slug }),
-        ...(body.description && { description: body.description }),
-        ...(body.price !== undefined && { price: Number(body.price) }),
-        ...(body.category && { category: body.category }),
-        ...(body.brand && { brand: body.brand }),
-        ...(body.images && { images: body.images }),
-        ...(body.mainImageIndex !== undefined && { mainImageIndex: Number(body.mainImageIndex) }),
-        ...(body.waterResistant !== undefined && { waterResistant: Boolean(body.waterResistant) }),
-        ...(body.inStock !== undefined && { inStock: body.inStock }),
-        ...(body.featured !== undefined && { featured: body.featured }),
-      },
-      { new: true, runValidators: true }
-    );
+    const updated = await Watch.findByIdAndUpdate(id, updates, {
+      new: true,
+      runValidators: true,
+    });
 
     return NextResponse.json({ success: true, data: serializeWatch(updated!) });
   } catch (error) {

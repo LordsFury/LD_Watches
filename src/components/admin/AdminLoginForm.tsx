@@ -65,13 +65,11 @@ export default function AdminLoginForm() {
           transition={{ duration: 0.7 }}
           className="relative text-center"
         >
-          <div className="inline-flex items-center justify-center w-44 h-44 rounded-full border border-ld-gold/20 bg-ld-gold/5 mb-8 gold-glow">
-            <WatchLogo className="w-28 h-28" />
+          <div className="flex justify-center mb-8 px-4">
+            <WatchLogo size="hero" />
           </div>
 
-          <h1 className="font-[family-name:var(--font-display)] text-3xl xl:text-4xl font-bold text-white mb-3">
-            {SITE_NAME_SHORT} <span className="text-gradient-gold">WATCHES</span>
-          </h1>
+          <h1 className="sr-only">{SITE_NAME_SHORT} WATCHES Admin</h1>
 
           <p className="text-ld-gold-light text-lg mb-2 tracking-wide">
             <TypewriterRotate
@@ -103,8 +101,8 @@ export default function AdminLoginForm() {
         >
           <div className="text-center mb-8 lg:text-left">
             <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 lg:hidden">
-              <WatchLogo className="w-10 h-10" />
-              <span className="font-[family-name:var(--font-display)] text-xl font-bold text-white">
+              <WatchLogo size="admin" />
+              <span className="font-[family-name:var(--font-display)] text-xl font-bold text-white sr-only">
                 {SITE_NAME_SHORT} <span className="text-gradient-gold">Admin</span>
               </span>
             </div>
