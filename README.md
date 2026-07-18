@@ -45,9 +45,10 @@ Edit `.env.local` with your values:
 | Variable | Description |
 |----------|-------------|
 | `MONGODB_URI` | MongoDB connection string |
-| `ADMIN_EMAIL` | Admin login email |
-| `ADMIN_PASSWORD` | Admin login password |
 | `JWT_SECRET` | Secret key for JWT tokens |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | Cloudinary API key |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp number (country code, no +) |
 | `NEXT_PUBLIC_SITE_URL` | Your site URL |
 
@@ -60,8 +61,6 @@ npm run create-admin
 This creates (or updates) an admin in MongoDB with:
 - Email: `admin@ldwatches.com`
 - Password: `admin123`
-
-Override via `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `.env.local`.
 
 4. **Start the development server:**
 
@@ -128,7 +127,7 @@ For production, ensure you:
 - Use a strong `JWT_SECRET`
 - Set `NEXT_PUBLIC_SITE_URL` to your domain
 - Use MongoDB Atlas or a managed MongoDB instance
-- Consider cloud storage (S3, Cloudinary) for images instead of local uploads
+- Set Cloudinary credentials so watch images upload to the cloud
 
 ## License
 

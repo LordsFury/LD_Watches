@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
 import { getAdminSession } from "@/lib/auth";
+import { uploadImageToCloudinary } from "@/lib/cloudinary";
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,20 +38,13 @@ export async function POST(request: NextRequest) {
     const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
     const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
 
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    await mkdir(uploadDir, { recursive: true });
-
-    const filepath = path.join(uploadDir, filename);
-    await writeFile(filepath, buffer);
-
-    const url = `/uploads/${filename}`;
+    const { url } = await uploadImageToCloudinary(buffer, filename);
 
     return NextResponse.json({ success: true, data: { url } });
   } catch (error) {
     console.error("POST /api/upload error:", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to upload file" },
-      { status: 500 }
-    );
+    const message =
+      error instanceof Error ? error.message : "Failed to upload file";
+    return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
